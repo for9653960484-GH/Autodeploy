@@ -1,0 +1,15 @@
+services:
+  backend:
+    image: python-docker-test:latest
+    expose:
+      - "8000"
+
+  frontend:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf:ro
